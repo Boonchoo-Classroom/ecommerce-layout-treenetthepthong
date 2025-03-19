@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import scisrc.mobiledev.ecommercelayout.R
 import scisrc.mobiledev.ecommercelayout.adapter.ProductAdapter
 import scisrc.mobiledev.ecommercelayout.adapter.CategoryAdapter
-import scisrc.mobiledev.ecommercelayout.databinding.FragmentHomeBinding
+import scisrc.mobiledev.ecommercelayout.databinding.FragmentAllProductsBinding
 import scisrc.mobiledev.ecommercelayout.model.Product
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class AllProductsFragment : Fragment() {
+    private var _binding: FragmentAllProductsBinding? = null
     private val binding get() = _binding!!
 
     private val allProducts = listOf(
@@ -30,8 +30,7 @@ class HomeFragment : Fragment() {
         Product("ช็อคโกแลตไส้คาราเมล", 20.0, "ช็อคโกแลตไส้คาราเมล", R.drawable.chocolate, "Chocolate"),
         Product("ช็อคโกแลตกล่องหัวใจ", 200.0, "ช็อคโกแลตกล่องหัวใจ", R.drawable.chocolatebox, "Chocolate"),
         Product("ช็อคโกแลตนูลเทล่า", 75.0, "ช็อคโกแลตนูลเทล่า", R.drawable.cholatenull, "Chocolate")
-
-        )
+    )
 
     private var filteredProducts = allProducts.toMutableList()
     private lateinit var productAdapter: ProductAdapter
@@ -40,7 +39,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentAllProductsBinding.inflate(inflater, container, false)
 
 
         productAdapter = ProductAdapter(requireContext(), filteredProducts)
@@ -52,13 +51,13 @@ class HomeFragment : Fragment() {
         val categoryAdapter = CategoryAdapter(categories) { selectedCategory ->
             filterProductsByCategory(selectedCategory)
         }
-
         binding.categoryRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.categoryRecyclerView.adapter = categoryAdapter
 
         return binding.root
     }
+
 
     private fun filterProductsByCategory(category: String) {
         filteredProducts = if (category == "All") {
